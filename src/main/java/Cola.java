@@ -81,31 +81,15 @@ public class Cola {
         return null;
     }
 
-    public int posicionPorAsiento(int asiento) {
-        validarAsiento(asiento);
-
-        int posicion = 1;
-        for (Pasajero p : coleccion) {
-            if (p.getNumeroAsiento() == asiento) {
-                return posicion;
-            }
-            posicion++;
-        }
-        return -1;
-    }
-
     public Pasajero cancelarPorAsiento(int asiento) {
         validarAsiento(asiento);
-// es uninterador
-        Iterator<Pasajero> it = coleccion.iterator();
-        while (it.hasNext()) {
-            Pasajero p = it.next();
+        for(Pasajero p : coleccion) {
             if (p.getNumeroAsiento() == asiento) {
-                it.remove();
+                coleccion.remove(p);
                 return p;
             }
         }
-        throw new NoSuchElementException("No hay un pasajero que quiera el puesto brodi " + asiento);
+        throw new NoSuchElementException("No hay un pasajero que ocupe ese puesto " + asiento);
     }
 
     @Override
