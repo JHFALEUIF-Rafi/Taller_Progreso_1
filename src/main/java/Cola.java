@@ -6,6 +6,10 @@ import java.util.NoSuchElementException;
 import java.util.Queue;
 
 public class Cola {
+    // El avión tiene asientos del 1 al 30.
+    private static final int ASIENTO_MIN = 1;
+    private static final int ASIENTO_MAX = 30;
+
     private final Queue<Pasajero> coleccion;
 
     public Cola() {
@@ -47,6 +51,15 @@ public class Cola {
 
     public List<Pasajero> obtenerPendientes() {
         return Collections.unmodifiableList(new ArrayList<>(coleccion));
+    }
+
+    // Revisa que el asiento exista (del 1 al 30). Si no, avisa con un error.
+    // La usan agregar, buscar, posición y cancelar para no repetir esta revisión.
+    private void validarAsiento(int asiento) {
+        if (asiento < ASIENTO_MIN || asiento > ASIENTO_MAX) {
+            throw new IllegalArgumentException("El asiento debe estar entre "
+                    + ASIENTO_MIN + " y " + ASIENTO_MAX);
+        }
     }
 
     public Pasajero buscarPorAsiento(int asiento) {
