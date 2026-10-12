@@ -21,8 +21,18 @@ public class Cola {
             throw new IllegalArgumentException("El pasajero no puede ser nulo");
         }
 
-        // TODO R1: validar nombre, asiento entre 1 y 30 y asiento no repetido.
-        // Validar ANTES de modificar la colección.
+        if (p.getNombre() == null || p.getNombre().trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre del pasajero es obligatorio");
+        }
+
+        validarAsiento(p.getNumeroAsiento());
+
+        for (Pasajero existente : coleccion) {
+            if (existente.getNumeroAsiento() == p.getNumeroAsiento()) {
+                throw new IllegalArgumentException("El asiento " + p.getNumeroAsiento()
+                        + " no puedes brodi  " + existente.getNombre());
+            }
+        }
 
         coleccion.offer(p);
     }
@@ -53,8 +63,6 @@ public class Cola {
         return Collections.unmodifiableList(new ArrayList<>(coleccion));
     }
 
-    // Revisa que el asiento exista (del 1 al 30). Si no, avisa con un error.
-    // La usan agregar, buscar, posición y cancelar para no repetir esta revisión.
     private void validarAsiento(int asiento) {
         if (asiento < ASIENTO_MIN || asiento > ASIENTO_MAX) {
             throw new IllegalArgumentException("El asiento debe estar entre "
@@ -63,17 +71,15 @@ public class Cola {
     }
 
     public Pasajero buscarPorAsiento(int asiento) {
-        // TODO R2: validar rango y buscar sin retirar pasajeros.
+
         throw new UnsupportedOperationException("Pendiente implementar R2: búsqueda");
     }
 
     public int posicionPorAsiento(int asiento) {
-        // TODO R2: posiciones desde 1; devolver -1 si no está en la fila.
         throw new UnsupportedOperationException("Pendiente implementar R2: posición");
     }
 
     public Pasajero cancelarPorAsiento(int asiento) {
-        // TODO R3: retirar únicamente al indicado y conservar el orden restante.
         throw new UnsupportedOperationException("Pendiente implementar R3: cancelación");
     }
 
