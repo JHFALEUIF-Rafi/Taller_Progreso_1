@@ -71,8 +71,13 @@ public class Cola {
     }
 
     public Pasajero buscarPorAsiento(int asiento) {
-
-        throw new UnsupportedOperationException("Pendiente implementar R2: búsqueda");
+        validarAsiento(asiento);
+        for (Pasajero p : coleccion) {
+            if (p.getNumeroAsiento() == asiento) {
+                return p;
+            }
+        }
+        return null;
     }
 
     public int posicionPorAsiento(int asiento) {
