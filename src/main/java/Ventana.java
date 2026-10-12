@@ -78,8 +78,22 @@ public class Ventana extends JFrame {
         }));
 
         btnCancelar.addActionListener(e -> ejecutar(() -> {
-            Pasajero p = cola.cancelarPorAsiento((Integer) spiConsulta.getValue());
-            lblMensaje.setText("Registro cancelado: " + p.getNombre());
+            int respuesta = JOptionPane.showConfirmDialog(
+                    this,
+                    "¿Estás seguro de que deseas cancelar?",
+                    "Confirmar cancelación",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE
+            );
+
+            if (respuesta == JOptionPane.YES_OPTION) {
+                Pasajero p = cola.cancelarPorAsiento((Integer) spiConsulta.getValue());
+                lblMensaje.setText("Registro cancelado del cliente: " + p.getNombre() + " | Asiento: " + p.getNumeroAsiento() + " | " + p.getTipoAsiento());
+
+            } else {
+                lblMensaje.setText("Cancelación de registro abortada.");
+            }
+
         }));
 
         btnFrente.addActionListener(e -> ejecutar(() ->
