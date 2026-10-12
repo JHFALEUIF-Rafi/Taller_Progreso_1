@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 
 public class Cola {
-    // El avión tiene asientos del 1 al 30.
+
     private static final int ASIENTO_MIN = 1;
     private static final int ASIENTO_MAX = 30;
 
@@ -71,21 +72,35 @@ public class Cola {
     }
 
     public Pasajero buscarPorAsiento(int asiento) {
-        validarAsiento(asiento);
-        for (Pasajero p : coleccion) {
-            if (p.getNumeroAsiento() == asiento) {
-                return p;
-            }
-        }
-        return null;
+
+        throw new UnsupportedOperationException("Pendiente implementar R2: búsqueda");
     }
 
     public int posicionPorAsiento(int asiento) {
-        throw new UnsupportedOperationException("Pendiente implementar R2: posición");
+        validarAsiento(asiento);
+
+        int posicion = 1;
+        for (Pasajero p : coleccion) {
+            if (p.getNumeroAsiento() == asiento) {
+                return posicion;
+            }
+            posicion++;
+        }
+        return -1;
     }
 
     public Pasajero cancelarPorAsiento(int asiento) {
-        throw new UnsupportedOperationException("Pendiente implementar R3: cancelación");
+        validarAsiento(asiento);
+// es uninterador
+        Iterator<Pasajero> it = coleccion.iterator();
+        while (it.hasNext()) {
+            Pasajero p = it.next();
+            if (p.getNumeroAsiento() == asiento) {
+                it.remove();
+                return p;
+            }
+        }
+        throw new NoSuchElementException("No hay un pasajero que quiera el puesto brodi " + asiento);
     }
 
     @Override
