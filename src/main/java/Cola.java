@@ -81,6 +81,19 @@ public class Cola {
         return null;
     }
 
+    public int posicionPorAsiento(int asiento) {
+        validarAsiento(asiento);
+
+        int posicion = 1;
+        for (Pasajero p : coleccion) {
+            if (p.getNumeroAsiento() == asiento) {
+                return posicion;
+            }
+            posicion++;
+        }
+        return -1;
+    }
+
     public Pasajero cancelarPorAsiento(int asiento) {
         validarAsiento(asiento);
         for(Pasajero p : coleccion) {
